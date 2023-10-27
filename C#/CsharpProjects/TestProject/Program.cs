@@ -17,6 +17,6 @@ class Program
         }
 
         // Output the count of rainy days
-        Console.WriteLine(rainyDays);
+        Console.WriteLine($"The number of rainy days is {rainyDays}");
     }
 }

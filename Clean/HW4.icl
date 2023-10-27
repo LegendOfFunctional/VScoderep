@@ -1,6 +1,6 @@
 module HW4
 import StdEnv
-/*
+
 
 	NEPTUN CODE:
 	NAME:  
@@ -45,7 +45,7 @@ generatePattern :: [(Char,Int)] -> String
 																index in first list: 		0 2   3  6 8
 					third: we take only the element that is greater than 0					[4,7,28]
 
-*/
+
 
 hof :: [Int] [Int]  -> [Int]
 
