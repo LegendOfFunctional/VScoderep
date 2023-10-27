@@ -16,7 +16,7 @@ class Program
             }
         }
 
-        // Output the count of rainy days
+        // I modified it in feature branch
         Console.WriteLine($"The number of rainy days is {rainyDays}");
     }
 }
