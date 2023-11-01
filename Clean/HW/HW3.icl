@@ -34,8 +34,7 @@ import StdEnv
 	For Example: [4,7,2,13,18,23,10,121],the length is 8 (Even) then that list has even odd even odd even odd even, so this should return true.
 	otherwise false.
 	
-*/
-/*  
+*/ 
 isOddEven :: [Int] -> Bool
 isOddEven [] = True
 isOddEven [x] = True
@@ -43,15 +42,8 @@ isOddEven [x, y:xs]
     | isEven (length xs) && isEven x && isOdd y = isOddEven [y:xs]
     | isOdd  (length xs) && isOdd x && isEven y = isOddEven [y:xs]
     | otherwise = False
-*/
-isOddEven :: [Int] -> Bool
-isOddEven [] = True
-isOddEven [x] = isOdd x
-isOddEven [x, y:xs]
-|  isOdd x && isEven y = isOddEven xs
-= False
 
-Start = isOddEven [4,7,2,13,18,23,10,121] 	// True
+//Start = isOddEven [4,7,2,13,18,23,10,121] 	// True
 //Start = isOddEven [7,2,-13,18,-23,17] 	// False
 //Start = isOddEven [4,-8,-3, 2, 5] 		// False
 //Start = isOddEven [-1, 0, 1, 0,-3] 		// True
