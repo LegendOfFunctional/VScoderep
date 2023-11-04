@@ -35,13 +35,13 @@ import StdEnv
 */
 
 
-planet :: [String]
-planet=["Mercury", "Venus", "Earth", "Mars","Ceres", "Jupiter", "Saturn", "Uranus"] 
+// planet :: [String]
+// planet=["Mercury", "Venus", "Earth", "Mars","Ceres", "Jupiter", "Saturn", "Uranus"] 
 
-semimajoraxis :: [Real]
-semimajoraxis=[0.72, 1.00, 0.39, 1.52, 9.58, 19.22, 2.77, 5.20]
+// semimajoraxis :: [Real]
+// semimajoraxis=[0.72, 1.00, 0.39, 1.52, 9.58, 19.22, 2.77, 5.20]
 
-titiusBodeDistances :: [Int] [String] [Real] -> [(String, Real, Real )]
+// titiusBodeDistances :: [Int] [String] [Real] -> [(String, Real, Real )]
 
 //Start=titiusBodeDistances [-100, 0, 1, 2, 3, 4, 5, 6] planet semimajoraxis
 //[("Mercury",0.39,0.4),("Venus",0.72,0.7),("Earth",1,1),("Mars",1.52,1.6),("Ceres",2.77,2.8),("Jupiter",5.2,5.2)]
@@ -61,6 +61,18 @@ titiusBodeDistances :: [Int] [String] [Real] -> [(String, Real, Real )]
 */
 
 checkEnoughFrequency :: [(String, Char, Int)] -> [Int]
+checkEnoughFrequency [] = []
+checkEnoughFrequency [(word, letter, index) : tuples] =
+    [checkCondition word letter index : checkEnoughFrequency tuples]
+
+checkCondition :: String Char Int -> Int
+checkCondition word letter index
+    | countOccurrences word letter >= index = 1
+    = 0
+
+countOccurrences :: String Char -> Int
+countOccurrences word letter = length [c \\ c <- word | c == letter]
+
 
 //Start = checkEnoughFrequency [("jofjsfoajof", 'f', 2), ("mxbawpedep", 'b', 2), ("pkaowacwidojoadw", 'w', 3)]		// [1,0,1]
 //Start = checkEnoughFrequency [("", 'o', 0), ("fds", 'i', 2)] 													// [1, 0]

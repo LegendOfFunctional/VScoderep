@@ -10,8 +10,16 @@ import StdEnv
            a = [4, 8]
            a = [8] 
 */
+aux :: [Int] -> [Int]
+aux [] = []
+aux [x] = []
+aux [x,y:xs] = [y] ++ aux xs
 
-//eliminate :: [Int] -> [Int]
+
+eliminate :: [Int] -> [Int]
+eliminate [x]=[x]
+eliminate [] = []
+eliminate list = eliminate (aux list)
 
 
 //Start = eliminate [1..9] // [8]
@@ -26,12 +34,19 @@ import StdEnv
     Input: n = 1111
     Output: 0 (There is no unique digit in n.)
 */
+toDigit :: Int -> [Int]
+toDigit 0 = []
+toDigit x = ([x rem 10] ++ toDigit (x / 10))
 
 
-//count_unique_digits :: Int -> Int
+isUnique :: Int [Int] -> Bool
+isUnique digit digits = length (filter ((==)digit) digits) == 1
 
+count_unique_digits :: Int -> Int
+count_unique_digits num = length [x \\ x <- toDigit num | isUnique x listnum]
+where listnum = toDigit num
 
-//Start = count_unique_digits 1234 // 4
+// Start = count_unique_digits 1234 // 4
 // Start = count_unique_digits 12325332 // 2
 // Start = count_unique_digits 111111 // 0
 // Start = count_unique_digits 1 // 1
@@ -42,9 +57,10 @@ import StdEnv
 // integers r (1 <= r < m) that are coprime with m.
 // Example: m = 10: r = 1,3,7,9; thus phi(m) = 4. Note the special case: phi(1) = 1.
 // Two integers a and b are coprime, if the only positive integer that divides (is a divisor of) both of them is 1.
-
+// isCoptime :: int int -> Bool
+// isCoptime x y 
 // phi :: Int -> Int
-
+// phi
 // Start = phi 1 // 1
 // Start = phi 10 // 4
 // Start = phi 12414 // 4136

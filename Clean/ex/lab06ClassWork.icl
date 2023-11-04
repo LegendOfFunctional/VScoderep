@@ -36,7 +36,8 @@ create3 list = [((fst tuple), (snd tuple), (fst tuple) + (snd tuple))\\ tuple <-
 
 extract3 :: [[Int]] -> [(Int, Int, Int)]
 extract3 list = [(hd sublist,sublist!!((length sublist)/2),last sublist) \\ sublist <- list]
-//Start = extract3 [[1..9], [2..6], [3..11], [1..10]] // [(1,5,9),(2,4,6),(3,7,11),(1,6,10)]
+
+// Start = extract3 [[1..9], [2..6], [3..11], [1..10]] // [(1,5,9),(2,4,6),(3,7,11),(1,6,10)]
 //Start = extract3 [] //[]
 
 /****************************************************************************************************************/
@@ -240,9 +241,9 @@ l7 = [(num3, num2, num1) \\ num1 <- [1..20], num2 <- [1..num1], num3 <- [1..num2
 */
 
 l30 :: [(Int, Int)]
-l30 = [(month, days)\\ days <- [1..31], month <- [1..12]]
+l30 = [(month, days)\\ days <- [1..31]& month <- [1..12]]
 
-//Start = l30
+// Start = l30
 
 /****************************************************************************************************************/
 
@@ -319,13 +320,16 @@ l17 = [(minute, hour)\\minute<-[1..60], hour<-[1..24]]
 
 duplic :: [Int] -> Bool
 duplic [] = False
-duplic [_] = False
-duplic [x, y : xs] = [x == y  duplic xs]
-//Start = duplic [1, 1] // True
-//Start = duplic [2] // False
-Start = duplic [1, 2, 3, 4, 5, 6, 7, 8, 9] // False
-//Start = duplic [1, 0, 5, 0, 0, 6, 7, 5, 0, 0, 0, 8, 0, 5, 0, 0, 0] // True
-//Start = duplic [1,2,3,4,4] // True
+duplic [x] = False
+duplic [x, y : xs] 
+| x == y = True
+= duplic [y: xs]
+// Start = duplic [1, 1] // True
+// Start = duplic [2] // False
+// Start = duplic [1, 2, 3, 4, 5, 6, 7, 8, 9] // False
+// Start = duplic [1, 0, 5, 0, 0, 6, 7, 5, 0, 0, 0, 8, 0, 5, 0, 0, 0] // True
+// Start = duplic [1,2,3,4,4] // True
+// Start = duplic [1,2,3,4,4] 
 
 /****************************************************************************************************************/
 
@@ -333,9 +337,14 @@ Start = duplic [1, 2, 3, 4, 5, 6, 7, 8, 9] // False
  29. write a function that removes neighbour duplicates in a list
 */
 
-//duplicrem :: [Int] -> [Int] 
-
-//Start = duplicrem [1,1, 0, 5, 0, 0, 6, 0,0,0, 7, 5, 0, 0, 0, 0, 8, 0, 5, 0, 0, 0] 
+duplicrem :: [Int] -> [Int] 
+duplicrem [] = []
+duplicrem [x] = [x]
+duplicrem [x, y, z: xs] 
+| x == y = duplicrem[y,z:xs]
+| y == z = duplicrem[x,z:xs]
+= [x, y: duplicrem  xs]
+// Start = duplicrem [1,1, 0, 5, 0, 0, 6, 0,0,0, 7, 5, 0, 0, 0, 0, 8, 0, 5, 0, 0, 0] 
 
 /****************************************************************************************************************/
 
@@ -343,8 +352,8 @@ Start = duplic [1, 2, 3, 4, 5, 6, 7, 8, 9] // False
  30. transform the sub-sub lists into one list of sublists
 */
 
-//f :: [[[Int]]] -> [[Int]]
-
-//Start = f [[[1,2,3], [3,4,5]], [[1,2,3], [3,4,5], [7,8,9]]] 
+f :: [[[Int]]] -> [[Int]]
+f list = [x \\ sublist <- list, x <- sublist]
+Start = f [[[1,2,3], [3,4,5]], [[1,2,3], [3,4,5], [7,8,9]]] 
 // result : [[1,2,3],[3,4,5],[1,2,3],[3,4,5],[7,8,9]]
 
