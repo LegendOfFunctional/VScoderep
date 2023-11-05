@@ -12,7 +12,7 @@ import StdEnv
 */
 //[toInt(toString(x rem 10) +++ toString (x / 10))\\ x <-list ]
 rev_nums :: [Int] -> [Int]
-rev_nums list = [reverseDigits x\\ x <- list ]
+rev_nums list = [reverseDigits x \\ x <- list ]
 where 
     reverseDigits n
     | n == 0 = 0
@@ -71,7 +71,6 @@ doubleOne list = filter (hasDouble) list
 holdsTrue :: [(Int, Int)] -> Bool
 holdsTrue list = foldr (&&) True (map (\t = isEven(fst t) && isOdd(snd t)) list)
 
-// Start = unzip [(2, 4), (4, 6)]
 
 // Start = holdsTrue [(2,1),(2,3),(4,1)] // True
 // Start = holdsTrue [(1,3),(2,3),(3,4)] // False
@@ -85,9 +84,10 @@ Example: [1,3,8,6,2], K=3 -> [1,2,2]
 1,8,2 are replaced with 1, 2, 2 reminders.
 */
 
-//filteredRem :: Int [Int] -> [Int]
+filteredRem :: Int [Int] -> [Int]
+filteredRem k list = map (\n = n rem k)(filter (\n = n rem k <>0 ) list)
 
-//Start = filteredRem 3 [1,3,8,6,2] // [1,2,2]
+// Start = filteredRem 3 [1,3,8,6,2] // [1,2,2]
 //Start = filteredRem 5 [5,10,30] // []
 //Start = filteredRem 2 [2,8,3,4,1] // [1,1]
 //Start = filteredRem 100 [20,17] // [20,17]
@@ -100,9 +100,9 @@ Example: the tuple ("ab", 3) should be replaced with ["ab","ab","ab"].
 
 */
 
-//stringCopy :: [(String,Int)] -> [[String]]
+stringCopy :: [(String,Int)] -> [[String]]
+// stringCopy tuples = map (\t = repeatn (snd t)(fst t)) tuples
 
-
-//Start = stringCopy [("X",3),("AA",2)] // [["X","X","X"],["AA","AA"]]
+// Start = stringCopy [("X",3),("AA",2)] // [["X","X","X"],["AA","AA"]]
 //Start = stringCopy [("Clean", 1),("?!",0),("Empty",-1)] // [["Clean"],[],[]]
 //Start = stringCopy [] // []
