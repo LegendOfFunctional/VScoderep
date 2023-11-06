@@ -31,13 +31,13 @@ import StdEnv
  an Armstrong number or not.
 */
 
-armstrong :: Int -> Bool
-armstrong x 
-| x < 10 = True
-| otherwise = x == (cube (x rem 10) 3) + armstrong (x / 10)
-where cube x n = x^n
+// armstrong :: Int -> Bool
+// armstrong x 
+// | x < 10 = True
+// | otherwise = x == (cube (x rem 10) 3) + armstrong (x / 10)
+// where cube x n = x^n
 
-Start = armstrong 153 // Change the number to the one you want to check
+// Start = armstrong 153 // Change the number to the one you want to check
 
  
 //Start = armstrong 153 // True
@@ -68,9 +68,14 @@ Start = armstrong 153 // Change the number to the one you want to check
  e.g: [1,5,8] = [1,3,5,7,9]
 */
 
-//gap2 :: [Int] -> [Int]
-
-//Start = gap2 [1,5,8] // [1,3,5,7,9]
+gap2 :: [Int] -> [Int]
+gap2 [] = []
+gap2 [x] = [x + 1]
+gap2 [x,y:xs] 
+| y - x == 2 = [x,y] ++ gap2 xs
+| y - x < 2 = [x, x + 2] ++ gap2 xs
+| y - x > 2 = [x, x + 2] ++ gap2 [y:xs]
+// Start = gap2 [1,5,8] // [1,3,5,7,9]
 //Start = gap2 [1,5,15] // [1,3,5,7,9,11,13,15]
 //Start = gap2 [] 
 

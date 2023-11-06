@@ -41,9 +41,19 @@ import StdEnv
 // semimajoraxis :: [Real]
 // semimajoraxis=[0.72, 1.00, 0.39, 1.52, 9.58, 19.22, 2.77, 5.20]
 
-// titiusBodeDistances :: [Int] [String] [Real] -> [(String, Real, Real )]
 
-//Start=titiusBodeDistances [-100, 0, 1, 2, 3, 4, 5, 6] planet semimajoraxis
+// // titiusBodeDistances :: [Int] [String] [Real] -> [(String, Real, Real)]
+
+// titiusBode :: Int -> Real
+// titiusBode n = 0.4 + 0.3 * 2.0^n
+
+// calculateDistances :: [Int] [String] [Real] -> [(String, Real, Real)]
+// calculateDistances nValues planetNames semimajorAxis = [ (name, actual, predicted) \\ (n, name, actual) <-zip (nValues planetNames semimajorAxis) | predicted = titiusBode n && abs(predicted - actual) <= 0.25]
+
+// Start = calculateDistances [0, 1, 2, 3, 4, 5, 6, 7] planetNames semimajorAxis
+
+
+// Start=titiusBodeDistances [-100, 0, 1, 2, 3, 4, 5, 6] planet semimajoraxis
 //[("Mercury",0.39,0.4),("Venus",0.72,0.7),("Earth",1,1),("Mars",1.52,1.6),("Ceres",2.77,2.8),("Jupiter",5.2,5.2)]
 
 
@@ -60,21 +70,21 @@ import StdEnv
 													   for the second tuple: there are 1 'i' inside the given string and the given integer is 2, (the given string doesn't have at least 2 'i') so, the second tuple is False and you store 0 for the second tuple.
 */
 
-checkEnoughFrequency :: [(String, Char, Int)] -> [Int]
-checkEnoughFrequency [] = []
-checkEnoughFrequency [(word, letter, index) : tuples] =
-    [checkCondition word letter index : checkEnoughFrequency tuples]
+// checkEnoughFrequency :: [(String, Char, Int)] -> [Int]
+// checkEnoughFrequency [] = []
+// checkEnoughFrequency [(word, letter, index) : tuples] =
+//     [checkCondition word letter index : checkEnoughFrequency tuples]
 
-checkCondition :: String Char Int -> Int
-checkCondition word letter index
-    | countOccurrences word letter >= index = 1
-    = 0
+// checkCondition :: String Char Int -> Int
+// checkCondition word letter index
+//     | countOccurrences word letter >= index = 1
+//     = 0
 
-countOccurrences :: String Char -> Int
-countOccurrences word letter = length [c \\ c <- word | c == letter]
+// countOccurrences :: String Char -> Int
+// countOccurrences word letter = length [c \\ c <- word | c == letter]
 
 
-//Start = checkEnoughFrequency [("jofjsfoajof", 'f', 2), ("mxbawpedep", 'b', 2), ("pkaowacwidojoadw", 'w', 3)]		// [1,0,1]
-//Start = checkEnoughFrequency [("", 'o', 0), ("fds", 'i', 2)] 													// [1, 0]
-//Start = checkEnoughFrequency [] 																				// []
-//Start = checkEnoughFrequency [("fffff", 'f', 3),("ppppp", 'p', 5)] 												// [1,1]
+// Start = checkEnoughFrequency [("jofjsfoajof", 'f', 2), ("mxbawpedep", 'b', 2), ("pkaowacwidojoadw", 'w', 3)]// [1,0,1]
+// Start = checkEnoughFrequency [("", 'o', 0), ("fds", 'i', 2)] 													// [1, 0]
+// Start = checkEnoughFrequency [] 																				// []
+// Start = checkEnoughFrequency [("fffff", 'f', 3),("ppppp", 'p', 5)] 												// [1,1]
