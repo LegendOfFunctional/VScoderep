@@ -73,11 +73,15 @@ import StdEnv
 checkEnoughFrequency :: [(String, Char, Int)] -> [Int]
 checkEnoughFrequency [] = []
 checkEnoughFrequency [(word, letter, index) : tuples] =
-    [(if countOccurrences word letter >= index then 1 else)  : checkEnoughFrequency tuples]
+    [checkCondition word letter index : checkEnoughFrequency tuples]
+
+checkCondition :: String Char Int -> Int
+checkCondition word letter index
+    | countOccurrences word letter >= index = 1
+    = 0
 
 countOccurrences :: String Char -> Int
 countOccurrences word letter = length [c \\ c <- word | c == letter]
-
 
 
 Start = checkEnoughFrequency [("jofjsfoajof", 'f', 2), ("mxbawpedep", 'b', 2), ("pkaowacwidojoadw", 'w', 3)]// [1,0,1]

@@ -91,7 +91,6 @@ Is a number perfect square?
 */
 
 isPerfectSquare :: Int -> Bool
-//isPerfectSquare x = toReal(toInt(sqrt (toReal x))) == sqrt (toReal x)
 isPerfectSquare x = (toInt (sqrt((toReal x) * 10.0))) rem 10 <> 0
 //Start = isPerfectSquare 9 // True
 //Start = isPerfectSquare 1 // True

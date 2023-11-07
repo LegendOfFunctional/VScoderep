@@ -354,4 +354,4 @@ fe [h,x:t]
 // do not compute factorial 
 //f21 :: Int -> Real
 
-Start = f21 1000
+// Start = f21 1000

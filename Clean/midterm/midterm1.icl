@@ -167,9 +167,18 @@ append ls = map (\sublist = sublist ++ [sum sublist, length sublist]) ls
 
 
 
-//clean :: Int Int Int Int -> [Int] 
+clean :: Int Int Int Int -> [Int] 
+clean n a b c
+    | n == 0 = []
+    | n == 1 = [a]
+    | n == 2 = [a, b]
+    | n == 3 = [a, b, c]
+ = a : b : c : generateClean n [a, b, c]
 
-// Start = clean 5 1 2 3 // [1,2,3,5,11]
+generateClean :: Int [Int] -> [Int]
+generateClean n sequence = (sequence !! (k - 1) * sequence !! (k - 2) + sequence !! (k - 3)) rem 1000
+
+Start = clean 5 1 2 3 // [1,2,3,5,11]
 // Start = clean 11 123 79 3 // [123,79,3,720,957,117,157,126,495,277,647]
 // Start = clean 2 1 2 3 // [1,2]
 // Start = clean 1 1 2 3 // [1]

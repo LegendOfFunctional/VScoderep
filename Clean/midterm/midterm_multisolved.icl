@@ -46,7 +46,7 @@ occur num [x:xs] i
 count_unique_digits2 :: Int -> Int
 count_unique_digits2 x = length [num \\ num<-(toDigit x) | occur num (toDigit x) 0 == 1 ]
 
-Start = count_unique_digits 1234 // 4
+// Start = count_unique_digits 1234 // 4
 // Start = count_unique_digits 12325332 // 2
 // Start = count_unique_digits 111111 // 0
 // Start = count_unique_digits 1 // 1
