@@ -1,6 +1,6 @@
 //---------------------------------------------------------------
 
-module midterm
+module midterm2021
 import StdEnv
 
 /*---------------------------------------------------------------
@@ -45,6 +45,19 @@ import StdEnv
 // [[3,2,1,1,2,3],[2,1,1,2],[1,1],[1,1],[2,1,1,2],[3,2,1,1,2,3]]
 
 // decreasing_list :: Int -> [[Int]]
+// decreasing_list n = [[n,n-1,n-2,1,1,n-2,n-2,n] \\ counter <-[1..(2*n)]]
+decreasing_list :: Int -> [[Int]]
+decreasing_list n
+    | n <= 0 = []
+    = [createList n n : decreasing_list (n - 1)]
+createList :: Int Int -> [Int]
+createList n x
+    | x == n = [x]
+    | x > 1 = [x : createList n (x - 1)] ++ [1]
+    = [1]
+
+// Start = decreasing_list 3
+
 
 // Start = decreasing_list 3 // [[3,2,1,1,2,3],[2,1,1,2],[1,1],[1,1],[2,1,1,2],[3,2,1,1,2,3]]
 // Start = decreasing_list 5 // [[5,4,3,2,1,1,2,3,4,5],[4,3,2,1,1,2,3,4],[3,2,1,1,2,3],[2,1,1,2],[1,1],[1,1],[2,1,1,2],[3,2,1,1,2,3],[4,3,2,1,1,2,3,4],[5,4,3,2,1,1,2,3,4,5]]
