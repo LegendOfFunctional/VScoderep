@@ -70,21 +70,16 @@ import StdEnv
 													   for the second tuple: there are 1 'i' inside the given string and the given integer is 2, (the given string doesn't have at least 2 'i') so, the second tuple is False and you store 0 for the second tuple.
 */
 
+checkOne :: (String, Char, Int) -> Int
+checkOne (a,b,c)
+|c<=(length[x \\ x<-(fromString a) | x==b]) = 1
+= 0
+
 checkEnoughFrequency :: [(String, Char, Int)] -> [Int]
-checkEnoughFrequency [] = []
-checkEnoughFrequency [(word, letter, index) : tuples] =
-    [checkCondition word letter index : checkEnoughFrequency tuples]
-
-checkCondition :: String Char Int -> Int
-checkCondition word letter index
-    | countOccurrences word letter >= index = 1
-    = 0
-
-countOccurrences :: String Char -> Int
-countOccurrences word letter = length [c \\ c <- word | c == letter]
+checkEnoughFrequency list = map checkOne list
 
 
-Start = checkEnoughFrequency [("jofjsfoajof", 'f', 2), ("mxbawpedep", 'b', 2), ("pkaowacwidojoadw", 'w', 3)]// [1,0,1]
+// Start = checkEnoughFrequency [("jofjsfoajof", 'f', 2), ("mxbawpedep", 'b', 2), ("pkaowacwidojoadw", 'w', 3)]// [1,0,1]
 // Start = checkEnoughFrequency [("", 'o', 0), ("fds", 'i', 2)] 													// [1, 0]
 // Start = checkEnoughFrequency [] 																				// []
 // Start = checkEnoughFrequency [("fffff", 'f', 3),("ppppp", 'p', 5)] 												// [1,1]
