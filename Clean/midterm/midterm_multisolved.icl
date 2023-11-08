@@ -43,8 +43,8 @@ occur num [x:xs] i
 | num == x = occur num xs (i + 1)
 = occur num xs i
 
-count_unique_digits2 :: Int -> Int
-count_unique_digits2 x = length [num \\ num<-(toDigit x) | occur num (toDigit x) 0 == 1 ]
+count_unique_digits2 :: Int -> [Int]
+count_unique_digits2 x = [num \\ num<-(toDigit x) | occur num (toDigit x) 0 == 1 ]
 
 // Start = count_unique_digits 1234 // 4
 // Start = count_unique_digits 12325332 // 2

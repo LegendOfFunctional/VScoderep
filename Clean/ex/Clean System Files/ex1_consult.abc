@@ -22,7 +22,7 @@
 .depend "StdOverloaded" "20211222160339"
 .depend "StdBool" "20211222160339"
 .depend "StdEnv" "20211222160339"
-.module m_ex1_consult "ex1_consult" "20231030150723"
+.module m_ex1_consult "ex1_consult" "20231108164635"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -59,55 +59,20 @@
 .impdesc d_S.6
 .implab n_S.6 ea_S.6
 .implab _driver
-.impmod StdList
-.implab e_StdList_s++
-.impmod StdInt
-.implab e_StdInt_s/;10
-.implab e_StdInt_s<;17
-.impdesc e_StdInt_drem;28
-.implab e_StdInt_nrem;28
 .export __ex1_consult_Start
 .o 0 0
 __ex1_consult_Start
-	build _ 0 n2
+	build _ 0 n1
 .d 1 0
 	jmp _driver
-.n 0 _ ea2
+.n 0 _
 .o 1 0
-n2
+n1
 	push_node _cycle_in_spine 0
-.o 1 0
-ea2
-.o 1 0
-s2
-	pushI 54213
-.d 1 1 i
-	jmp s1
-.o 1 1 i
-s1
-	pushI 10
-	push_b 1
-	ltI
-	jmp_false else.1
-	buildh _Nil 0
-	buildI_b 0
-	fillh _Cons 2 2
+.o 0 0
+ea1
+	pushI 4
+	fillI_b 0 0
 	pop_b 1
 .d 1 0
 	rtn
-else.1
-	buildh _Nil 0
-	buildI 10
-	buildI_b 0
-	build _ 2 e_StdInt_nrem;28
-	buildh _Cons 2
-	pushI 10
-	push_b 1
-	divI
-	create
-	updatepop_b 0 1
-.d 1 1 i
-	jsr s1
-.o 1 0
-.d 3 0
-	jmp e_StdList_s++

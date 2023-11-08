@@ -8,7 +8,7 @@ f1 :: Int Int -> Int
 f1 0 x = 10
 f1 n x = x + f1 (n-1) x
 
-Start = f1 5 2 // 20
+// Start = f1 5 2 // 20
 
 
 
@@ -56,11 +56,11 @@ f5 n x = f5 (n-1) x ++ [x^n]
 
 
 // 6. Replicate n>0 times a list.
-f6 :: Int [Int] -> [[Int]]
-f6 0 x = []
-f6 n x = [x : f6 (n-1) x]
+rep :: Int [Int] -> [[Int]]
+rep 0 x = []
+rep n x = [x : rep (n-1) x]
 
-//Start = f6 3 [1..5] // [[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5]]
+Start = rep 3 [1..5] // [[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5]]
 
 
 

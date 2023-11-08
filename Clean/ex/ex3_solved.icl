@@ -250,9 +250,9 @@ f4 [x:xs] = [ sq x : f4 xs ]
 
 // 18. Replicate n>0 times the element of a list e.g. n=3 [3..6] ->
 // [[3,3,3],[4,4,4],[5,5,5],[6,6,6]]
-faux :: Int Int -> [Int]
-faux 0 x = []
-faux n x = [ x : faux (n-1) x]
+rep :: Int Int -> [Int]
+rep 0 x = []
+rep n x = [ x : rep (n-1) x]
 
 //Start = faux 3 4
 
@@ -503,11 +503,11 @@ f7 n [x:xs]
 notempty :: [Int] -> Bool
 notempty x = not (x == [])
 
-f8 :: [[Int]] -> [[Int]]
-f8 [] = []
-f8 [x:xs] 
-| notempty x = [x: f8 xs]
-= f8 xs
+empty :: [[Int]] -> [[Int]]
+empty [] = []
+empty [x:xs] 
+| notempty x = [x: empty xs]
+= empty xs
 
-Start = f8 [[1,2,3],[],[3,4,5],[2,2],[],[],[]] 
+Start = empty [[1,2,3],[],[3,4,5],[2,2],[],[],[]] 
 

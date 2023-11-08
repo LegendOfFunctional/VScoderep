@@ -296,7 +296,7 @@ f4 [x:xs] = [(sq x) : (f4 xs)]
 faux :: Int Int -> [Int]
 faux 0 x = []
 faux n x = [x : faux (n-1) x]
-//Start = faux 3 4
+// Start = faux 3 4
 // faux 3 4
 // [4 : faux 2 4]
 // [4 : [ 4: faux 1 4]]

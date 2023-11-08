@@ -22,7 +22,7 @@
 .depend "StdOverloaded" "20211222160339"
 .depend "StdBool" "20211222160339"
 .depend "StdEnv" "20211222160339"
-.module m_midterm2 "midterm2" "20231105082714"
+.module m_midterm2 "midterm2" "20231108185627"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -59,68 +59,105 @@
 .impdesc d_S.6
 .implab n_S.6 ea_S.6
 .implab _driver
-.impmod StdList
-.implab e_StdList_s++
+.impmod _SystemEnum
+.implab e__SystemEnum_s_from_to;6
 .impmod StdInt
-.impdesc e_StdInt_d+;6
-.implab e_StdInt_n+;6
-.implab e_StdInt_s-;7
+.implab e_StdInt_s+;6
 .implab e_StdInt_s==;16
-.implab e_StdInt_s<;17
 .export __midterm2_Start
 .o 0 0
 __midterm2_Start
-	build _ 0 n2
+	build _ 0 n3
 .d 1 0
 	jmp _driver
-.n 0 _ ea2
+.n 0 _ ea3
 .o 1 0
-n2
+n3
 	push_node _cycle_in_spine 0
 .o 1 0
-ea2
+ea3
 .o 1 0
-s2
-	buildh _Nil 0
-	buildI 8
-	buildh _Cons 2
-	buildI 5
-	buildh _Cons 2
-	buildI 1
-	buildh _Cons 2
+s3
+	create
+	pushI 5
+	pushI 1
+.d 1 2 ii
+	jsr e__SystemEnum_s_from_to;6
+.o 1 0
 .d 2 0
-	jmp s1
-.n 1 _ ea1
+	jmp s2
+.o 2 0
+s2
+	push_a 0
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 3 0
+	jmp s4
+.n 2 _ ea4
 .o 1 0
-n1
-	push_node _cycle_in_spine 1
-.o 2 0
-ea1
-	jsr_eval 0
-.o 2 0
-s1
-	eq_desc _Nil 0 0
+n4
+	push_node _cycle_in_spine 2
+.o 3 0
+ea4
+	jsr_eval 1
+.o 3 0
+s4
+	push_a 0
+	push_a 2
+	update_a 1 3
+	updatepop_a 0 2
+.d 3 0
+	jmp s5
+.o 3 0
+s5
+	eq_desc _Cons 2 0
 	jmp_true case.1
 	jmp case.2
 case.1
-	fillh _Nil 0 1
-	pop_a 1
+	repl_args 2 2
+	push_a 1
+	push_a 3
+	build _ 2 n4
+	buildI 0
+	push_a 4
+	push_a 3
+	build _ 3 n1
+	fillh _Cons 2 5
+	pop_a 3
 .d 1 0
 	rtn
 case.2
-	repl_args 2 2
+	fillh _Nil 0 2
+	pop_a 2
+.d 1 0
+	rtn
+.n 3 _
+.o 1 0
+n1
+	push_node _cycle_in_spine 3
+.d 3 0
+	jsr ea1
+.o 0 1 i
+	fillI_b 0 0
+	pop_b 1
+.d 1 0
+	rtn
+.o 3 0
+ea1
 	jsr_eval 1
+	pushI_a 2
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.o 2 1 i
+s1
 	eq_desc _Nil 0 1
 	jmp_true case.3
 	jmp case.4
 case.3
-	buildh _Nil 0
-	buildI 1
-	push_a 2
-	build _ 2 e_StdInt_n+;6
-	fillh _Cons 2 4
 	pop_a 2
-.d 1 0
+.d 0 1 i
 	rtn
 case.4
 	push_args 1 2 2
@@ -135,80 +172,33 @@ case.4
 	jsr_eval 0
 	pushI_a 1
 	pop_a 1
-	subI
-	pushI 2
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
 	eqI
 	jmp_false else.5
 	push_a 1
-	build _ 1 n1
-	buildh _Nil 0
-	push_a 2
-	buildh _Cons 2
-	push_a 4
-	buildh _Cons 2
+	jsr_eval 0
+	push_b 0
+	push_a 3
+	updatepop_b 0 1
 	update_a 1 5
 	updatepop_a 0 4
-.d 3 0
-	jmp e_StdList_s++
-else.5
-	pushI_a 2
-	pushI_a 0
-	subI
-	pushI 2
+.d 2 1 i
+	jsr s1
+.o 0 1 i
+	pushI 1
 	push_b 1
 	update_b 1 2
 	update_b 0 1
 	pop_b 1
-	ltI
-	jmp_false else.6
+	addI
+.d 0 1 i
+	rtn
+else.5
 	push_a 1
-	build _ 1 n1
-	buildh _Nil 0
-	buildI 2
-	push_a 5
-	build _ 2 e_StdInt_n+;6
-	buildh _Cons 2
-	push_a 4
-	buildh _Cons 2
+	jsr_eval 0
+	push_b 0
+	push_a 3
 	update_a 1 5
 	updatepop_a 0 4
-.d 3 0
-	jmp e_StdList_s++
-else.6
-	pushI_a 2
-	pushI_a 0
-	subI
-	pushI 2
-	ltI
-	jmp_false else.7
-	push_a 1
-	push_a 1
-	buildh _Cons 2
-	build _ 1 n1
-	buildh _Nil 0
-	buildI 2
-	push_a 5
-	build _ 2 e_StdInt_n+;6
-	buildh _Cons 2
-	push_a 4
-	buildh _Cons 2
-	update_a 1 5
-	updatepop_a 0 4
-.d 3 0
-	jmp e_StdList_s++
-else.7
-	pop_a 3
-	jmp s1.1
-s1.1
-	pop_a 2
-	pushD m_midterm2
-	pushD x_1
-.d 0 2 ii
-	jmp _match_error
-.string x_1 "gap2"
-.impmod _system
-.implab _match_error
+	updatepop_b 0 1
+.d 2 1 i
+	jmp s1

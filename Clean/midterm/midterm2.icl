@@ -30,20 +30,23 @@ import StdEnv
  Given a positive integer number, write a function to determine whether it is
  an Armstrong number or not.
 */
+toDigit :: Int -> [Int]
+toDigit x
+| x < 10 = [x]
+= toDigit (x / 10) ++ [x rem 10]
 
-// armstrong :: Int -> Bool
-// armstrong x 
-// | x < 10 = True
-// | otherwise = x == (cube (x rem 10) 3) + armstrong (x / 10)
-// where cube x n = x^n
+armstrong :: Int -> Bool
+armstrong num 
+| (foldr (+) 0 [y ^ 3 \\ y <- toDigit num]) == num = True
+ = False
 
 // Start = armstrong 153 // Change the number to the one you want to check
 
  
 //Start = armstrong 153 // True
-//Start = armstrong 370 // True
-//Start = armstrong 0 // True
-//Start = armstrong 12 // False
+// Start = armstrong 370 // True
+// Start = armstrong 0 // True
+// Start = armstrong 12 // False
 
 
 /* 2. Occurrences
@@ -51,9 +54,14 @@ import StdEnv
  Given a list of integers, replace every element in the list with its number
  of occurrences in the list.
 */
+countNum :: Int [Int] Int -> Int
+countNum num [] count = count
+countNum num [x:xs] count
+| x == num = countNum num xs count+1
+= countNum num xs count
 
-//occNum :: [Int] -> [Int]
-
+occNum :: [Int] -> [Int]
+occNum list = [countNum x list 0\\x<-list ]
 // Start = occNum [1,1,1,1,2,3,2,5,6,2,2,2,5] // [4,4,4,4,5,1,5,2,1,5,5,5,2]
 // Start = occNum [1..5] // [1,1,1,1,1]
 // Start = occNum ([1..5] ++ [1..7]) // [2,2,2,2,2,2,2,2,2,2,1,1]

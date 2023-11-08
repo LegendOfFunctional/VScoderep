@@ -67,7 +67,7 @@ toElement :: [Int] -> Int
 toElement [] = 0
 toElement [x] = x
 toElement [x : ls] = x
- 
+
 digRemover :: (Int,[Int]) -> Int
 digRemover (a, tuple) = toElement [x\\x <- (toDigit a) & y <- tuple | x<>y]
 

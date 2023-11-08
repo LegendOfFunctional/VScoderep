@@ -22,7 +22,7 @@
 .depend "StdOverloaded" "20211222160339"
 .depend "StdBool" "20211222160339"
 .depend "StdEnv" "20211222160339"
-.module m_ex3 "ex3" "20231030150038"
+.module m_ex3 "ex3" "20231108182056"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -60,7 +60,7 @@
 .implab n_S.6 ea_S.6
 .implab _driver
 .impmod StdInt
-.implab e_StdInt_s==;16
+.implab e_StdInt_s-;7
 .export __ex3_Start
 .o 0 0
 __ex3_Start
@@ -75,59 +75,44 @@ n2
 ea2
 .o 1 0
 s2
-	buildh _Nil 0
-	buildI 3
-	buildh _Cons 2
 	buildI 4
-	buildh _Cons 2
-	buildI 5
-	buildh _Cons 2
-	buildI 4
-	buildh _Cons 2
-	buildI 5
-	buildh _Cons 2
-.d 2 0
+	pushI 3
+.d 2 1 i
 	jmp s1
-.n 1 _ ea1
-.o 1 0
-n1
-	push_node _cycle_in_spine 1
-.o 2 0
-ea1
-	jsr_eval 0
-.o 2 0
+.o 2 1 i
 s1
-	eq_desc _Nil 0 0
+	eqI_b 0 0
 	jmp_true case.1
 	jmp case.2
 case.1
 	fillh _Nil 0 1
 	pop_a 1
+	pop_b 1
 .d 1 0
 	rtn
 case.2
-	repl_args 2 2
 	push_a 0
-	jsr_eval 0
-	pushI_a 1
+	push_b 0
+	build_u _ 1 1 n5
+	push_a 1
+	fillh _Cons 2 3
 	pop_a 1
-	pushI 5
-	push_b 1
-	update_b 1 2
-	update_b 0 1
 	pop_b 1
-	eqI
-	jmp_false else.3
-	push_a 1
-	jsr_eval 0
-	updatepop_a 0 2
-.d 2 0
-	jmp s1
-else.3
-	push_a 1
-	build _ 1 n1
-	push_a 1
-	fillh _Cons 2 4
-	pop_a 2
 .d 1 0
 	rtn
+.nu 1 1 _ _
+.o 1 0
+n5
+	push_node_u _cycle_in_spine 1 1
+.o 2 1 i
+ea5
+.o 2 1 i
+s5
+	pushI 1
+	push_b 1
+	subI
+	push_a 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 2 1 i
+	jmp s1

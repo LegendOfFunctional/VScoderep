@@ -141,14 +141,15 @@ f2 [] = []
 f2 [x:xs] 
 | isOdd x = [3*x : f2 xs]
 = [x * 10: f2 xs]
-//Start = f2 [1..10] // [3,20,9,40,15,60,21,80,27,100]
-
+// Start = f2 [1..10] // [3,20,9,40,15,60,21,80,27,100]
+Start = 4
 
 
 // 12. write a function that keeps the integers of a list up to the 
 // value of the last element. If not found, the full list must be returned.
 f3 :: [Int] -> [Int]
 f3 list = takeWhile (\x = x <> (last list)) list
+
 
 auxf32 :: [Int] Int -> [Int]
 auxf32 [] lastNum = []
