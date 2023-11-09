@@ -22,7 +22,7 @@
 .depend "StdOverloaded" "20211222160339"
 .depend "StdBool" "20211222160339"
 .depend "StdEnv" "20211222160339"
-.module m_midterm1 "midterm1" "20231101135158"
+.module m_midterm1 "midterm1" "20231109011510"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -63,78 +63,167 @@
 .impdesc e__SystemEnum_d_from_to;6
 .implab e__SystemEnum_n_from_to;6 e__SystemEnum_ea_from_to;6
 .impmod StdList
-.implab e_StdList_s++
-.implab e_StdList_smap
-.impdesc e_StdList_dlength;47
-.implab e_StdList_nlength;47
-.impdesc e_StdList_dsum;72
-.implab e_StdList_nsum;72
+.implab e_StdList_slength;47
+.implab e_StdList_sisMember;51
 .export __midterm1_Start
 .o 0 0
 __midterm1_Start
-	build _ 0 n2
+	build _ 0 n3
 .d 1 0
 	jmp _driver
-.n 0 _ ea2
+.n 0 _ ea3
 .o 1 0
-n2
+n3
 	push_node _cycle_in_spine 0
 .o 1 0
-ea2
-.o 1 0
-s2
-	buildh _Nil 0
-	buildh _Nil 0
-	buildI 6
-	buildh _Cons 2
-	buildI 5
-	buildh _Cons 2
-	buildh _Cons 2
-	buildh _Nil 0
-	buildh _Cons 2
-	buildI 4
-	buildI 1
-	build e__SystemEnum_d_from_to;6 2 e__SystemEnum_n_from_to;6
-	buildh _Cons 2
-	buildI 5
-	buildI 1
-	build e__SystemEnum_d_from_to;6 2 e__SystemEnum_n_from_to;6
-	buildh _Cons 2
-.d 2 0
-	jmp s1
-.o 2 0
-s1
-	buildh d3 0
-	push_a 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	update_a 1 2
-	updatepop_a 0 1
-.d 3 0
-	jmp e_StdList_smap
-.desc d3 _hnf l3 1 0 "<lambda>[line:27];18;2"
-.o 2 0
-l3
-	update_a 1 0
-	create
-	update_a 0 2
-	pop_a 1
-.o 2 0
 ea3
-	jsr_eval 0
-.o 2 0
+.o 1 0
 s3
 	buildh _Nil 0
-	push_a 1
-	build e_StdList_dlength;47 1 e_StdList_nlength;47
+	buildI 3
 	buildh _Cons 2
-	push_a 1
-	build e_StdList_dsum;72 1 e_StdList_nsum;72
+	buildI 2
 	buildh _Cons 2
-	push_a 1
-	update_a 1 2
-	updatepop_a 0 1
+	buildI 1
+	buildh _Cons 2
+	buildh _Nil 0
+	buildI 6
+	buildI 3
+	build e__SystemEnum_d_from_to;6 2 e__SystemEnum_n_from_to;6
+	buildh _Cons 2
+	buildI 6
+	buildI 1
+	build e__SystemEnum_d_from_to;6 2 e__SystemEnum_n_from_to;6
+	buildh _Cons 2
+	buildh _Nil 0
+	buildI 3
+	buildh _Cons 2
+	buildI 2
+	buildh _Cons 2
+	buildI 1
+	buildh _Cons 2
+	buildh _Cons 2
 .d 3 0
-	jmp e_StdList_s++
+	jmp s2
+.o 3 0
+s2
+	push_a 0
+	push_a 2
+	update_a 1 3
+	updatepop_a 0 2
+.d 3 0
+	jmp s4
+.n 2 _ ea4
+.o 1 0
+n4
+	push_node _cycle_in_spine 2
+.o 3 0
+ea4
+	jsr_eval 1
+.o 3 0
+s4
+	push_a 0
+	push_a 2
+	update_a 1 3
+	updatepop_a 0 2
+.d 3 0
+	jmp s7
+.o 3 0
+s7
+	eq_desc _Cons 2 0
+	jmp_true case.1
+	jmp case.2
+case.1
+	repl_args 2 2
+	push_a 1
+	push_a 3
+	build _ 2 n4
+	push_a 3
+	push_a 2
+	build _ 2 n1
+	fillh _Cons 2 5
+	pop_a 3
+.d 1 0
+	rtn
+case.2
+	fillh _Nil 0 2
+	pop_a 2
+.d 1 0
+	rtn
+.n 2 _
+.o 1 0
+n1
+	push_node _cycle_in_spine 2
+.d 2 0
+	jsr ea1
+.o 0 1 i
+	fillI_b 0 0
+	pop_b 1
+.d 1 0
+	rtn
+.o 2 0
+ea1
+	jsr_eval 0
+.o 2 0
+s1
+	create
+	push_a 1
+	push_a 3
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 3 0
+	jsr s5
+.o 1 0
+.d 1 0
+	jmp e_StdList_slength;47
+.n 2 _ ea5
+.o 1 0
+n5
+	push_node _cycle_in_spine 2
+.o 3 0
+ea5
+	jsr_eval 1
+.o 3 0
+s5
+	push_a 0
+	push_a 2
+	update_a 1 3
+	updatepop_a 0 2
+.d 3 0
+	jmp s6
+.o 3 0
+s6
+	eq_desc _Cons 2 0
+	jmp_true case.3
+	jmp case.4
+case.3
+	repl_args 2 2
+	push_a 2
+	jsr_eval 0
+	push_a 1
+.d 2 0
+	jsr e_StdList_sisMember;51
+.o 0 1 b
+	jmp_false else.5
+	push_a 1
+	push_a 3
+	build _ 2 n5
+	push_a 1
+	fillh _Cons 2 5
+	pop_a 3
+.d 1 0
+	rtn
+else.5
+	push_a 1
+	jsr_eval 0
+	push_a 3
+	update_a 1 4
+	updatepop_a 0 3
+.d 3 0
+	jmp s5
+case.4
+	fillh _Nil 0 2
+	pop_a 2
+.d 1 0
+	rtn
