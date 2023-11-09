@@ -22,10 +22,17 @@ import StdEnv
  Given a list of lists, append to the end of every sublist 
  the sum and the length of the sublist
 */
+eachsum :: [Int] -> [Int]
+eachsum [] = []
+eachsum list = list ++ [sum list] ++ [length list]
+
+//Start = eachsum [1,2,3,4,5]
 
 append :: [[Int]] -> [[Int]]
-append ls = map (\sublist = sublist ++ [sum sublist, length sublist]) ls
+append [] = []
+append list  =  map (eachsum) list
 
+//Start = append []
 //Start = append [[1..5],[1..4],[],[5,6]]  // [[1,2,3,4,5,15,5],[1,2,3,4,10,4],[0,0],[5,6,11,2]]
 //Start = append [[(-1),(-2)..(-10)],[12],[5]]  // [[-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-55,10],[12,12,1],[5,5,1]]
 //Start = append []  // []
@@ -34,14 +41,21 @@ append ls = map (\sublist = sublist ++ [sum sublist, length sublist]) ls
  
  Given a list of real numbers, keep only the fraction part of the number
 */
-fractionAux :: Real -> Real 
-fractionAux x 
-|toReal (toInt x) > x= x - toReal(toInt x - 1)
-= x - toReal (toInt x) 
+
+frachelp :: Real -> Real
+frachelp x
+| x - toReal (toInt (x)) < 1.0 = x + 1.0 - toReal (toInt (x))
+= x - toReal (toInt (x))
+
+//Start = frachelp 0.6
 
 fraction :: [Real] -> [Real]
-fraction list = map fractionAux list
-// Start = fraction [1.2,1.5,0.6] //[0.2,0.5,0.6]
+fraction [] = [] 
+fraction list = map (frachelp) list
+
+//Start = fraction [1.25, 8.2115548896, 53.21,45.58,0.005]
+
+//Start = fraction [1.2,1.5,0.6] //[0.2,0.5,0.6]
 //Start = fraction [1.25, 8.2115548896, 53.21,45.58,0.005] //[0.25,0.2115548896,0.21,0.58,0.00005]
 //Start = fraction [] // []
 
@@ -51,20 +65,48 @@ fraction list = map fractionAux list
  Given a list of integers, write a function which gets rid of the numbers that is occurring
  less than 5 times in the list.
 */
-// isfamous :: Int -> Bool
-// isfamous y = length [\\filter (==) x list ]
+/*
+
+famhelp :: Int [Int] Int -> Bool
+//famhelp num  _ counter = False
+famhelp num [x:xs] counter
+| num == x = famhelp num xs (counter+1)
+| (counter < 5) && (length xs == 1) = False
+| counter < 5 = famhelp num xs counter
+| counter >= 5 = True
+= True
+
+//Start = famhelp 1 [1,1,1,1,1,1,1,2,2,2,2] 0
 
 famousNum :: [Int] -> [Int]
-famousNum list = [x \\ x <- list | length [y \\ y <- list | y == x] >= 5]
+famousNum [] = []
+famousNum [x:xs] = filter (\y -> famhelp x [x:xs] 0) [x:xs]
+//| famhelp x [x:xs] 0 == False = filter x [x:xs]
 
-countOcc2 :: Int [Int] -> Int
-countOcc2 x ls = length [el \\ el <- ls | x == el ] 
+Start = famousNum [1,1,1,1,2,2,2,2]
+*/
 
-famousNum2 :: [Int] -> [Int]
-famousNum2 ls = filter (\x = (countOcc2 x ls) >= 5) ls 
-// Start = famousNum [1,1,1,1,1,1,2,3,4,4,4,4,5,5,5,5,5] // [1,1,1,1,1,1,5,5,5,5,5]
-// Start = famousNum [] // []
-// Start = famousNum [1,2,3,4,5,6,1,1,1,2,2,2,2,1,1,5,10,3] // [1,2,1,1,1,2,2,2,2,1,1]
+helper :: Int [Int] Int -> Int
+helper num [] counter = counter
+helper num [x:xs] counter 
+| num == x = helper num xs (counter+1)
+= helper num xs counter
+
+//Start = helper 1 [1,1,1,1] 0
+
+famousNum :: [Int] -> [Int]
+famousNum [] = []
+famousNum [y:xs] = filter (\y=(helper y [y:xs] 0)>5) [y:xs]
+
+//Start = famousNum [1,1,1,1,1,1,2,3,4,4,4,4,5,5,5,5,5]
+
+/*
+= famousNum (filter x [x:xs])
+Start = famousNum [1,1,1,1,1,1,2,3,4,4,4,4,5,5,5,5,5]
+*/
+//Start = famousNum [1,1,1,1,1,1,2,3,4,4,4,4,5,5,5,5,5] // [1,1,1,1,1,1,5,5,5,5,5]
+//Start = famousNum [] // []
+//Start = famousNum [1,2,3,4,5,6,1,1,1,2,2,2,2,1,1,5,10,3] // [1,2,1,1,1,2,2,2,2,1,1]
 
 
 
@@ -75,25 +117,21 @@ famousNum2 ls = filter (\x = (countOcc2 x ls) >= 5) ls
  If there is no value, or the list is empty, return -1. e.g., findPrev 5 [1,2,3,4,5,6] should return 4, 
  while findPrev 5 [0, 10, 20, 30] returns -1.
 */
-findPrev :: Int [Int] -> Int
-findPrev x [] = -1  // Return -1 for an empty list.
-findPrev x [y] = -1  // Return -1 if there is no value before x.
-findPrev x [y:ys]
-    | x == y = -1
-    | x == hd ys = y
-    = findPrev x ys
 
 
-findPrev2 :: Int [Int] -> Int 
-findPrev2 x ls 
-| isEmpty list = -1
-= last list
-where list =  (takeWhile (\c = c  <> x) ls) 
- 
 
-// Start = findPrev 5 [1,2,3,4,5,6] // 4
-// Start = findPrev 1 [1,2,3,4,5,6] // -1
-// Start = findPrev 1 [] // -1 
+findPrev :: Int [Int] -> Int 
+findPrev num [] = -1
+findPrev num [x:xs]
+| isMember ([x:xs] !! num-2) [x:xs] = [x:xs] !! num-2 
+= -1 
+
+//Start = findPrev 1 []
+
+//Start = isMember 44 [1,2,3,44,5,6]
+//Start = findPrev 5 [1,2,3,4,5,6] // 4
+//Start = findPrev 1 [1,2,3,4,5,6] // -1
+//Start = findPrev 1 [] // -1 
 
  
 
@@ -104,15 +142,25 @@ where list =  (takeWhile (\c = c  <> x) ls)
  where A - B is The difference of two lists  defined as follows:  
  The List A-B consists of elements that are in A but not in B.
  And (U) the union of two lists is a list containing all the elements of A and B without duplicates 
+
 */
 
-dif :: [Int] [Int] -> [Int]
-dif lsa lsb = [c \\ c <- lsa | not (isMember c lsb)]
- 
-symmetricDif :: [Int] [Int] -> [Int]
-symmetricDif lsa lsb = sort ((dif lsa lsb)  ++  (dif lsb lsa))
+//| isMember x [y:ys] = symmetricDif (removeMember x [y:ys]) (removeMember x [x:xs])
+//| isMember y [x:xs] = symmetricDif (removeMember y [x:xs]) (removeMember y [y:ys])
 
-// Start = symmetricDif  [1,2,3,4,5] [2,4,6] //  [1,3,5,6]
+symmetricDif :: [Int] [Int] -> [Int]
+symmetricDif [] [] = []
+symmetricDif [x:xs] [] = [x:xs]
+symmetricDif [] [y:ys] = [y:ys]
+symmetricDif [x:xs] [y:ys]
+| isMember x [y:ys] = symmetricDif (removeMember x [y:ys]) (removeMember x [x:xs])
+| isMember y [x:xs] = symmetricDif (removeMember y [x:xs]) (removeMember y [y:ys])
+= [x:xs] ++ [y:ys]
+
+//Start = symmetricDif  [1..5] []
+
+//Start = removeMember 2 (removeMember 1 [1,2,3,4,5])
+//Start = symmetricDif  [1,2,3,4,5] [2,4,6] //  [1,3,5,6]
 //Start = symmetricDif  [1..5] [1..10] // [6,7,8,9,10]
 //Start = symmetricDif  [1..5] [] // [1,2,3,4,5]
 
@@ -123,11 +171,24 @@ symmetricDif lsa lsb = sort ((dif lsa lsb)  ++  (dif lsb lsa))
  Given a list of integers and an integer N, 
  eliminate from the list elements that are positioned before N in the list and are not equal to N,
  then compute the biquadrate of the numbers left in the list.
+
 */
 
-// notN :: Int [Int] -> [Int]
+biquadrate :: Int -> Int
+biquadrate x = x^4
 
+
+
+notN :: Int [Int] -> [Int]
+notN x [] = []
+notN x [y:ys] = map (biquadrate) (reverse (drop x (reverse [y:ys])))
+
+//Start = notN 6 [10,8,7,6,5,4,3,2,1]
+//Start = map (biquadrate) (reverse (drop 3 (reverse [1,2,3,4,5])))
+//Start = map (biquadrate)(drop 3 [1,2,3,4,5])
+//Start = map (isOdd) [1,2,3]
 //Start = notN 3 [1..5] // [1,16]
+// [10,8,7,6,5,4,3,2,1]
 //Start = notN [] // []
 //Start = notN 6 [10,8..1] // [10000,4096]
 
@@ -142,15 +203,18 @@ symmetricDif lsa lsb = sort ((dif lsa lsb)  ++  (dif lsb lsa))
 */
 
 gap2C :: [Int] -> Bool
-gap2C [] = True
 gap2C [x] = True
-gap2C [x,y:xs] 
-| y - x == 2 = gap2C [y:xs]
+gap2C [] = False
+gap2C [x:y:xs]
+| y - x == 2 = True && gap2C [y:xs]
 = False
-// Start = gap2C [1,3,5,7] // True
-// Start = gap2C [1,3,5,7,9,11,13,15] // True
-// Start = gap2C [1,5,8] // False
-// Start = gap2C [] // False
+
+//Start = gap2C [1,5,8]
+
+//Start = gap2C [1,3,5,7] // True
+//Start = gap2C [1,3,5,7,9,11,13,15] // True
+//Start = gap2C [1,5,8] // False
+//Start = gap2C [] // False
 
 
 
@@ -166,12 +230,33 @@ gap2C [x,y:xs]
  Next one [1,3,3,4,9,6] has 3 good numbers (1,3,3) which is half of total length, hence it is a good one as well.
  Last list [3..6] has only one good number and is not a good list. Therefore, answer for this example is 2.
 */
-checkGoodlist :: [Int] [Int] -> Int
-checkGoodlist list goodlist = length [x\\x<-list | isMember x goodlist] 
+
+trr :: [Int] [Int] -> Bool
+trr x a = length[n \\ n<-a | isMember n x] >= (length x)/2
+
+//Start = trr [3,2,5,6,6,6,6] [1,2,3]
 
 
-goodLists :: [[Int]] [Int] -> [Int]
-goodLists listOfLists goodNums = [checkGoodlist list goodNums \\ list<-listOfLists]
+goodLists :: [[Int]] [Int] -> Int
+goodLists [] y = 0
+goodLists [x:xs] y
+| trr x y = 1 + goodLists xs y
+= goodLists xs y 
+
+/*
+
+goodLists :: [[Int]] [Int] -> Int
+goodLists [] y = 0
+goodLists [x:xs] y
+| trr x y = 1 + goodLists xs y
+=goodLists xs y
+
+*/
+
+//Start = goodLists [[], [3,2,5], [1,1,2,2]] [1]
+
+
+
 // Start = goodLists [[1,2,3], [1..6], [3..6]] [1,2,3] // 2
 // Start = goodLists [[1], [1..6], [3,8,5]] [1,2,3,8] // 3
 // Start = goodLists [[], [3,2,5], [1,1,2,2]] [1] // 2
@@ -183,7 +268,13 @@ goodLists listOfLists goodNums = [checkGoodlist list goodNums \\ list<-listOfLis
  Numbers are called co-prime if they do not have
  common divisor.
 */
-//coPrimes :: Int Int -> Bool
+
+
+coPrimes :: Int Int -> Bool
+coPrimes x y = (gcd x y == 1)
+
+Start = coPrimes 12 12
+
 
 // Start = coPrimes 12 9 // False
 // Start = coPrimes 12 12 // False
@@ -204,16 +295,7 @@ goodLists listOfLists goodNums = [checkGoodlist list goodNums \\ list<-listOfLis
 
 
 
-// clean :: Int Int Int Int -> [Int] 
-// clean n a b c
-//     | n == 0 = []
-//     | n == 1 = [a]
-//     | n == 2 = [a, b]
-//     | n == 3 = [a, b, c]
-//  = a : b : c : generateClean n [a, b, c]
-
-// generateClean :: Int [Int] -> [Int]
-// generateClean n sequence = (sequence !! (k - 1) * sequence !! (k - 2) + sequence !! (k - 3)) rem 1000
+//clean :: Int Int Int Int -> [Int] 
 
 // Start = clean 5 1 2 3 // [1,2,3,5,11]
 // Start = clean 11 123 79 3 // [123,79,3,720,957,117,157,126,495,277,647]

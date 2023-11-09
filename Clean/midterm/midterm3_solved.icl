@@ -1,4 +1,4 @@
-module midterm3
+module midterm3_solved
 
 import StdEnv 
 
@@ -13,9 +13,9 @@ import StdEnv
 //I declare that this solution is my own work.
 //I have not copied or used third party solutions.
 //I have not passed my solution to my classmates, neither made it public.
-//Students’ regulation of Eotvos Lorand University 
+//Studentsï¿½ regulation of Eotvos Lorand University 
 //(ELTE Regulations Vol. II. 74/C.) 
-//states that as long as a student presents another student’s work - 
+//states that as long as a student presents another studentï¿½s work - 
 //or at least the significant part of it - as his/her own performance, 
 //it will count as a disciplinary fault. 
 //The most serious consequence of a disciplinary fault can be 
@@ -27,7 +27,7 @@ import StdEnv
  A Parasitic number (in base 10) is a positive number which can be multiplied 
  by a certain n by moving the rightmost digit of its decimal representation 
  to the front.
- e.g. 102564 × 4 = 410256
+ e.g. 102564 ï¿½ 4 = 410256
  Given a positive integer number and n, write a function to determine whether 
  it is a Parasitic number or not.
 */
@@ -112,13 +112,13 @@ diff [x : ls] ms
 | not ((isMember x) ms) = [x] ++ diff ls ms
 = diff ls ms
 
-//Start = diff [1..5] [4..7]
+// Start = diff [1..5] [4..7]
  
 difference :: [[Int]] [[Int]] -> [[Int]]
 difference [] [] = []
 difference [x : ls] [y : ms] = [diff x y] ++ difference ls ms 
 
-//Start = difference [[1..5]] [[4..7]] // [[1,2,3]]
+// Start = difference [[1..5]] [[4..7]] // [[1,2,3]]
 //Start = difference [[1..10] , [10..15] , [1..4]] [[1..10] , [11..20] , [5]] // [[],[10],[1,2,3,4]]
 //Start = difference [] [] // [] 
 
@@ -163,7 +163,7 @@ primes7 [x : ls]
 | (isPrime x) && ((x rem 10) == 7) = [x] ++ primes7 ls
 = primes7 ls
 
-//Start = primes7 [1..10] // [7]
+// Start = primes7 [1..10] // [7]
 //Start = primes7 [1..100] // [7,17,37,47,67,97]
 //Start = primes7 [1..6] // []
 
@@ -238,7 +238,7 @@ super_digit ls = map superAux ls
 powersList :: [Int] Int -> [Int]
 powersList ls x = [x^i \\ y <- ls & i <- [0..] | (isMember (x^i)) ls]
 
-//Start = powersList [2,4,8,16,32,33,55] 2 // [2,4,8,16,32]
+// Start = powersList [2,4,8,16,32,33,55] 2 // [2,4,8,16,32]
 //Start = powersList [] 3 // []
 //Start = powersList [1..10] 3 // [1,3,9]
 //Start = powersList [-1,-2,4,8] 4 // [4]
@@ -264,5 +264,5 @@ twinPrimes fs ls = (length [(x, y) \\ x <- [fs..ls], y <- [fs..ls] | ((isPrime x
 //Start = twinPrimes 0 2 // 0
 //Start = twinPrimes 0 -5 // 0
 
-Start = [1, 2, 3, 4, []] == [1, 2, 3, 4]
+// Start = [1, 2, 3, 4, []] == [1, 2, 3, 4]
 

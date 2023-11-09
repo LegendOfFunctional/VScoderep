@@ -60,12 +60,14 @@ doubleOne [x:xs] = [x rem 1 : doubleOne xs]
  Given an n>0 integer value, write a function that creates the double, the triple
  and so on n-th multiple of the number.
 */
+multiple :: Int -> [Int]
+multiple n
+    | n <= 0 = []
+    = [n * counter \\ counter <- [2..n]]
 
-//multiple :: Int -> [Int]
-
-//Start = multiple 5 // [10,15,20,25]
-//Start = multiple 2 // [2]
-//Start = multiple 1 // []
+// Start = multiple 5 // [10,15,20,25]
+// Start = multiple 2 // [4]
+// Start = multiple 1 // []
 
 
 /* 4. List difference
@@ -78,11 +80,18 @@ doubleOne [x:xs] = [x rem 1 : doubleOne xs]
  The List L1-L2 consists of elements that are in L1 but not in L2. 
  For example if L1=[1,2,3] and L2=[3,5], then L1-L2=[1,2].
 */
+diff :: [Int] [Int] -> [Int]
+diff [] ms =[]
+diff [x:xs] ms 
+  | not (isMember x ms) = [x] ++ diff xs ms
+  = [] ++ diff xs ms
+// Start = diff [1..5] [4..7]
 
-//difference :: [[Int]] [[Int]] -> [[Int]] 
-
-//Start = difference [[1..5]] [[4..7]] // [[1,2,3]]
-//Start = difference [[1..10] , [10..15] , [1..4]] [[1..10] , [11..20] , [5]] // [[],[10],[1,2,3,4]]
+difference :: [[Int]] [[Int]] -> [[Int]] 
+difference [] [] = []
+difference [x:xs] [y:ys]= [diff x y] ++ difference xs ys
+// Start = difference [[1..5]] [[4..7]] // [[1,2,3]]
+// Start = difference [[1..10] , [10..15] , [1..4]] [[1..10] , [11..20] , [5]] // [[],[10],[1,2,3,4]]
 //Start = difference [] [] // [] 
 
  
@@ -91,11 +100,12 @@ doubleOne [x:xs] = [x rem 1 : doubleOne xs]
  Given a list of lists of integers and an integer, write a function that replaces 
  the middle element with the given integer in every sublist. 
 */
-
-//repMid :: [[Int]] Int -> [[Int]]
-
-//Start = repMid [[1,2,3],[1..4]] 10 // [[1,10,3],[1,2,10,4]]
-//Start = repMid [[1..6], [9,8..1], [(-1),(-2)..(-10)]] 5 
+middle :: Int [Int]  -> [Int]
+middle num list = (take ((length list / 2)) list) ++ [num] ++ (drop ((length list / 2)+1) list)
+repMid :: [[Int]] Int -> [[Int]]
+repMid list x = map (middle x) list
+// Start = repMid [[1,2,3],[1..4]] 10 // [[1,10,3],[1,2,10,4]]
+// Start = repMid [[1..6], [9,8..1], [(-1),(-2)..(-10)]] 5 
           // [[1,2,3,5,5,6],[9,8,7,6,5,4,3,2,1],[-1,-2,-3,-4,-5,5,-7,-8,-9,-10]]
 //Start = repMid [[1,3],[]] 5 // [[1,5],[5]]
 
@@ -105,11 +115,11 @@ doubleOne [x:xs] = [x rem 1 : doubleOne xs]
  Given a list of numbers, keep only the prime numbers that end with the digit 7
 */
 
-//primes7 :: [Int] -> [Int]
-
-//Start = primes7 [1..10] // [7]
-//Start = primes7 [1..100] // [7,17,37,47,67,97]
-//Start = primes7 [1..6] // []
+primes7 :: [Int] -> [Int]
+primes7 list = removeDup [ x \\ x <- list, denominator<-[1..x]| (x rem denominator)== 0 && (x rem 10) == 7 ]
+// Start = primes7 [1..10] // [7]
+// Start = primes7 [1..100] // [7,17,37,47,67,97]
+// Start = primes7 [1..6] // []
 
 
 /* 7. Property check
@@ -119,11 +129,19 @@ doubleOne [x:xs] = [x rem 1 : doubleOne xs]
  [(2,1),(2,3),(4,1)] = True
 */
 
-//holdsTrue :: [(Int, Int)] -> Bool
+holdsAux :: [(Int, Int)] -> Bool
+holdsAux [] = True
+holdsAux [x:xs]
+| isEven (fst x) && isOdd (snd x) = holdsAux xs
+= False
 
-//Start = holdsTrue [(2,1),(2,3),(4,1)] // True
-//Start = holdsTrue [(1,3),(2,3),(3,4)] // False
-//Start = holdsTrue [] // False
+
+holdsTrue :: [(Int, Int)] -> Bool
+holdsTrue [] = False
+holdsTrue list = holdsAux list
+// Start = holdsTrue [(2,1),(2,3),(4,1)] // True
+// Start = holdsTrue [(1,3),(2,3),(3,4)] // False
+// Start = holdsTrue [] // False
 
 
 /* 8. Super Digit
@@ -144,22 +162,33 @@ doubleOne [x:xs] = [x rem 1 : doubleOne xs]
  Given a list of integers, return a list containing the super digit
  of every number in the list.  
 */
+toDigit :: Int -> [Int]
+toDigit 0 = []
+toDigit x = (reverse([x rem 10] ++ toDigit (x / 10)))
 
-//super_digit :: [Int] -> [Int]
+sums :: Int -> Int
+sums x
+| x < 10 = x
+= sums (sum (toDigit x) ) 
 
-//Start = super_digit [148148148 , 9875 ] // [3,2]
-//Start = super_digit [884555 , 456 , 2351 , 21587 , 88 ] // [8,6,2,5,7]
-//Start = super_digit [] // [] 
+super_digit :: [Int] -> [Int]
+super_digit list = map sums list
+// Start = super_digit [148148148 , 9875 ] // [3,2]
+// Start = super_digit [884555 , 456 , 2351 , 21587 , 88 ] // [8,6,2,5,7]
+// Start = super_digit [] // [] 
 
 
 /* 9. Powers 
  Given a list of integers and an integer, write a function which returns a list 
  which only contains the powers of the integer.
 */
-
-//powersList :: [Int] Int -> [Int]
-
-//Start = powersList [2,4,8,16,32,33,55] 2 // [2,4,8,16,32]
+// powers [Int] Int -> [Int]
+// powers list x 
+// |isMember x list 
+powersList :: [Int] Int -> [Int]
+powersList list power 
+= [x^i \\x<-list & i<-[1..]|(isMember (x^i)) list]
+// Start = powersList [2,4,8,16,32,33,55] 2 // [2,4,8,16,32]
 //Start = powersList [] 3 // []
 //Start = powersList [1..10] 3 // [1,3,9]
 //Start = powersList [-1,-2,4,8] 4 // [4]
@@ -176,10 +205,12 @@ doubleOne [x:xs] = [x rem 1 : doubleOne xs]
  E.g: between 1 and 50 there are 6 pairs of twin prime numbers:
  [(3,5),(5,7),(11,13),(17,19),(29,31),(41,43)].
 */
+isPrime :: Int -> Bool
+isPrime n= length [i\\i<-[1..n]|(n rem i)==0]==2
+twinPrimes :: Int Int -> Int
+twinPrimes fs ls = (length [(x, y) \\ x <- [fs..ls], y <- [fs..ls] | ((isPrime x) && (isPrime y)) && ((abs (x - y)) == 2)]) /2
 
-//twinPrimes :: Int Int -> Int
-
-//Start = twinPrimes 1 50 // 6
+// Start = twinPrimes 1 50 // 6
 //Start = twinPrimes 1 1000 // 35
 //Start = twinPrimes 0 2 // 0
 //Start = twinPrimes 0 -5 // 0

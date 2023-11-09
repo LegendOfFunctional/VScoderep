@@ -70,8 +70,10 @@ doubleOne list = filter (hasDouble) list
 
 holdsTrue :: [(Int, Int)] -> Bool
 holdsTrue list = foldr (&&) True (map (\t = isEven(fst t) && isOdd(snd t)) list)
+foldr (&&) True
+foldr (+++) "" [name]
 
-
+foldr (+) 0 [x:xs]
 // Start = holdsTrue [(2,1),(2,3),(4,1)] // True
 // Start = holdsTrue [(1,3),(2,3),(3,4)] // False
 //Start = holdsTrue [] // False

@@ -19,25 +19,29 @@ import StdEnv
 /* 1. Remove 0
 Write a function that removes the zeros from a list. */
 
-//remove0 :: [Int] -> [Int]
+remove0 :: [Int] -> [Int]
+remove0 list = [x\\x<-list |x <> 0]
 
-
-//Start = remove0 [0,0,0,0,1,2,3,0,4,0,0,0,5,0,0,0,0,6,7,8,0] // 1,2,3,4,5,6,7,8]
+// Start = remove0 [0,0,0,0,1,2,3,0,4,0,0,0,5,0,0,0,0,6,7,8,0] // 1,2,3,4,5,6,7,8]
 
 /* 2. Change to 0
 Write a  function that changes even numbers to 0 in a list.*/
+ 
+change0 :: [Int] -> [Int]
+change0 [] = []
+change0 [x:xs] 
+| isEven x = [0] ++ change0 xs
+= [x] ++ change0 xs
 
-//change0 :: [Int] -> [Int]
-
-//Start = change0 [1..10] // [1,0,3,0,5,0,7,0,9,0]
-//Start = change0 [1,6,4,8,9,10,11,13,16] // [1,0,0,0,9,0,11,13,0]
+// Start = change0 [1..10] // [1,0,3,0,5,0,7,0,9,0]
+// Start = change0 [1,6,4,8,9,10,11,13,16] // [1,0,0,0,9,0,11,13,0]
 
 /* 3. Sum of dubles
 Write a function to change to double all elements and sum them up. */
 
-//sumdouble :: [Int] -> Int
-
-//Start = sumdouble [1..10] // 110
+sumdouble :: [Int] -> Int
+sumdouble list = sum [x * 2\\x<-list ]
+// Start = sumdouble [1..10] // 110
 
 //Use the below lists for the following tasks
 
@@ -185,21 +189,21 @@ last row are 1 and rest are 0. Example:
  0 0 0   is not L matrix because not all elements of first column are 1
  1 1 1   */
 
-checkRow :: [Int] -> Bool
-checkRow [] = False
-checkRow [x: xs] = x == 1 && (all (\el -> el == 0) xs)
+// checkRow :: [Int] -> Bool
+// checkRow [] = False
+// checkRow [x: xs] = x == 1 && (all (\el -> el == 0) xs)
 
-checkLastRow :: [Int] -> Bool
-checkLastRow [] = True
-checkLastRow l = all (\el -> el == 1) l
+// checkLastRow :: [Int] -> Bool
+// checkLastRow [] = True
+// checkLastRow l = all (\el -> el == 1) l
 
-check:: [Int] Int Int -> Bool
-check l idx len
-| idx == len - 1 = checkLastRow l
-= checkRow l
+// check:: [Int] Int Int -> Bool
+// check l idx len
+// | idx == len - 1 = checkLastRow l
+// = checkRow l
 
-LorNot :: [[Int]] -> Bool
-LorNot l = [check x idx (length l) \\ x <- l & idx <- (indexList l)]
+// LorNot :: [[Int]] -> Bool
+// LorNot l = [check x idx (length l) \\ x <- l & idx <- (indexList l)]
 
 Start = LorNot [[1,0,0],[1,0,0],[1,1,1]] // True
 //Start = LorNot [[1,0,0],[0,0,0],[1,1,1]] // False

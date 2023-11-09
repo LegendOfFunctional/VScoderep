@@ -25,12 +25,13 @@ is greater than the number. Write a function which checks
 if a given integer is abundant number or not.
 Eg. 12 proper divisors 1+2+3+4+6=16 > 12 True
      8 proper divisors 1+2+4=7 < 8 False 
-*/
+*/ 
 
 abundant :: Int -> Bool 
-abundant x 
+abundant x            
 | sum [num \\ num <-[1..(x-1)] | x rem num == 0] > x = True
 = False
+
 // Start = abundant 12 // True
 // Start = abundant 18 // True
 //Start = abundant 8 // False
@@ -47,15 +48,20 @@ the number itself.
 Eg. 145 is strong number 1!+4!+5! = 1+24+120 = 145
 */
 
-// toDigit :: Int -> [Int]
-// toDigit 0 = []
-// toDigit x = sum ([x rem 10] ++ toDigit (x / 10))
-// strong_num :: Int -> Bool 
-// strong_num n = (sum(map (\x = prod[1..x])list)) == n
-// where list = toDigit
-//Start = strong_num 145 // True 
-//Start = strong_num 45
-//Start = strong_num 2 // True 
+toDigit :: Int -> [Int]
+toDigit 0 = []
+toDigit x = toDigit (x / 10) ++ [x rem 10] 
+
+factorial :: Int -> Int
+factorial n = prod[1..n]
+
+strong_num :: Int -> Bool 
+strong_num n 
+|sum [factorial x\\ x<-toDigit n] == n = True
+=False
+// Start = strong_num 145 // True 
+// Start = strong_num 45
+// Start = strong_num 2 // True 
 //Start = strong_num 40585 // True 
 //Start = strong_num 458 // False 
 
@@ -127,13 +133,14 @@ Eg. [2, 1, 4, 3, 5] -> [1,2,3,4,5] -> middle value is 3
     [1, 2, 3, 4] is sorted, the average of 2 and 3 is 2.5 
 */
 
-// median :: [Int] -> Real 
-// median list
-// |isOdd (length list) = toReal((sort list)!!(length list/2))
-// = toReal((sort list)!!((length/2)-1) + toReal((sort list)!!(length/2))) /2.0
+median :: [Int] -> Real 
+median list
+|isOdd(length list) = toReal((sort list)!!(length list/2))
+= toReal((sort list)!!((length list/2)-1))+toReal((sort list)!!(length list/2))/2.0
+
 // Start = median [2, 1, 4, 3, 5] // 3
 //Start = median [5] // 5
-//Start = median [1, 2, 3, 4] // 2.5
+// Start = median [1, 2, 3, 4] // 2.5
 //Start = median [10, 20, 30] // 20
 //Start = median [10, 20, 30, 40] // 25
 //Start = median [] // -1

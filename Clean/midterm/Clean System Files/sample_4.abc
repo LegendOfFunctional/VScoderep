@@ -1,5 +1,5 @@
 .comp 920 010111010010000
-.start __midterm_mock_Start
+.start __sample_4_Start
 .depend "_SystemEnumStrict" "20211222160339"
 .depend "_SystemStrictLists" "20211222160339"
 .depend "StdStrictLists" "20211222160339"
@@ -22,7 +22,7 @@
 .depend "StdOverloaded" "20211222160339"
 .depend "StdBool" "20211222160339"
 .depend "StdEnv" "20211222160339"
-.module m_midterm_mock "midterm_mock" "20231109104635"
+.module m_sample_4 "sample_4" "20231109160221"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -59,63 +59,73 @@
 .impdesc d_S.6
 .implab n_S.6 ea_S.6
 .implab _driver
-.impmod _SystemEnum
-.impdesc e__SystemEnum_d_from_to;6
-.implab e__SystemEnum_n_from_to;6 e__SystemEnum_ea_from_to;6
-.impmod StdOrdList
-.implab e_StdOrdList_smaxList;15
-.impmod StdList
-.implab e_StdList_slength;47
-.implab e_StdList_ssum;72
 .impmod StdInt
-.implab e_StdInt_s-;7
-.implab e_StdInt_s/;10
-.implab e_StdInt_sabs;13
 .implab e_StdInt_s<;17
 .impmod StdBool
 .implab e_StdBool_snot
-.export __midterm_mock_Start
+.export __sample_4_Start
 .o 0 0
-__midterm_mock_Start
+__sample_4_Start
 	build _ 0 n2
 .d 1 0
 	jmp _driver
-.n 0 _ ea2
+.n 0 _
 .o 1 0
 n2
 	push_node _cycle_in_spine 0
-.o 1 0
+.d 0 0
+	jsr ea2
+.o 2 0
+	push_a 1
+	push_a 1
+	fillh _Tuple 2 4
+	pop_a 2
+.d 1 0
+	rtn
+.o 0 0
 ea2
-.o 1 0
+.o 0 0
 s2
 	buildh _Nil 0
-	buildI 100
-	buildI 1
-	build e__SystemEnum_d_from_to;6 2 e__SystemEnum_n_from_to;6
+	buildI 60
+	buildAC "Mohammad"
+	buildh ARRAY 1
+	buildh _Tuple 2
+	buildh _Cons 2
+	buildI 88
+	buildAC "Harsh"
+	buildh ARRAY 1
+	buildh _Tuple 2
+	buildh _Cons 2
+	buildI 40
+	buildAC "Vivek"
+	buildh ARRAY 1
+	buildh _Tuple 2
+	buildh _Cons 2
+	buildI 23
+	buildAC "Ramesh"
+	buildh ARRAY 1
+	buildh _Tuple 2
 	buildh _Cons 2
 	buildI 30
-	buildI 20
-	build e__SystemEnum_d_from_to;6 2 e__SystemEnum_n_from_to;6
-	buildh _Cons 2
-	buildI 10
-	buildI 1
-	build e__SystemEnum_d_from_to;6 2 e__SystemEnum_n_from_to;6
-	buildh _Cons 2
-	buildI 10
 	push_a 1
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-.d 3 0
+.d 2 0
 	jmp s1
-.o 3 0
+.o 2 0
 s1
 	push_a 0
 	push_a 2
+	build _ 2 n4
+	push_a 1
+	push_a 3
+	build _ 2 n3
 	update_a 1 3
 	updatepop_a 0 2
-.d 3 0
-	jmp s3
+.d 2 0
+	rtn
 .n 2 _ ea3
 .o 1 0
 n3
@@ -130,9 +140,9 @@ s3
 	update_a 1 3
 	updatepop_a 0 2
 .d 3 0
-	jmp s4
+	jmp s8
 .o 3 0
-s4
+s8
 	eq_desc _Cons 2 0
 	jmp_true case.1
 	jmp case.2
@@ -144,43 +154,128 @@ case.1
 	pop_a 1
 	push_a 0
 	jsr_eval 0
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	push_a 0
-.d 1 0
-	jsr e_StdList_ssum;72
-.o 0 1 i
-	divI
-	push_a 0
-.d 1 0
-	jsr e_StdOrdList_smaxList;15
-.o 0 1 i
-	subI
-.d 0 1 i
-	jsr e_StdInt_sabs;13
-.o 0 1 i
-	ltI
-	notB
-	jmp_false else.3
+	repl_args 2 2
+	jsr_eval 1
+	pushI_a 1
+	update_a 0 1
+	pop_a 1
+	push_a 2
 	push_a 1
-	push_a 3
-	build _ 2 n3
-	push_a 1
-	fillh _Cons 2 5
-	pop_a 3
-.d 1 0
-	rtn
-else.3
-	push_a 1
-	jsr_eval 0
-	push_a 3
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
 	update_a 1 4
 	updatepop_a 0 3
-.d 3 0
-	jmp s3
+.d 3 2 ii
+	jmp s7
 case.2
 	fillh _Nil 0 2
 	pop_a 2
 .d 1 0
 	rtn
+.o 3 2 ii
+s7
+case.3
+	push_b 1
+	push_b 1
+	ltI
+	jmp_false else.5
+	push_a 1
+	buildI_b 1
+	build _ 2 n3
+	buildI_b 0
+	push_a 2
+	buildh _Tuple 2
+	fillh _Cons 2 4
+	pop_a 2
+	pop_b 2
+.d 1 0
+	rtn
+else.5
+	jmp case.4
+case.4
+	push_a 1
+	jsr_eval 0
+	buildI_b 1
+	update_a 1 3
+	updatepop_a 0 2
+	pop_b 2
+.d 3 0
+	jmp s3
+.n 2 _ ea4
+.o 1 0
+n4
+	push_node _cycle_in_spine 2
+.o 3 0
+ea4
+	jsr_eval 1
+.o 3 0
+s4
+	push_a 0
+	push_a 2
+	update_a 1 3
+	updatepop_a 0 2
+.d 3 0
+	jmp s6
+.o 3 0
+s6
+	eq_desc _Cons 2 0
+	jmp_true case.6
+	jmp case.7
+case.6
+	repl_args 2 2
+	push_a 2
+	jsr_eval 0
+	pushI_a 3
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	repl_args 2 2
+	jsr_eval 1
+	pushI_a 1
+	update_a 0 1
+	pop_a 1
+	push_a 2
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 4
+	updatepop_a 0 3
+.d 3 2 ii
+	jmp s5
+case.7
+	fillh _Nil 0 2
+	pop_a 2
+.d 1 0
+	rtn
+.o 3 2 ii
+s5
+case.8
+	push_b 1
+	push_b 1
+	ltI
+	notB
+	jmp_false else.10
+	push_a 1
+	buildI_b 1
+	build _ 2 n4
+	buildI_b 0
+	push_a 2
+	buildh _Tuple 2
+	fillh _Cons 2 4
+	pop_a 2
+	pop_b 2
+.d 1 0
+	rtn
+else.10
+	jmp case.9
+case.9
+	push_a 1
+	jsr_eval 0
+	buildI_b 1
+	update_a 1 3
+	updatepop_a 0 2
+	pop_b 2
+.d 3 0
+	jmp s4

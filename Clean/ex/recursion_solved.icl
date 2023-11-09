@@ -37,7 +37,7 @@ eliminate list = eliminate (aux list)
 toDigit :: Int -> [Int]
 toDigit 0 = []
 toDigit x = ([x rem 10] ++ toDigit (x / 10))
-
+125
 
 isUnique :: Int [Int] -> Bool
 isUnique digit digits = length (filter ((==)digit) digits) == 1

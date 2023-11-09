@@ -1,4 +1,4 @@
-module midterm_evening
+module midterm2_solved
 
 import StdEnv 
 

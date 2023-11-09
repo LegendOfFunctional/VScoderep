@@ -1,5 +1,5 @@
 .comp 920 010111010010000
-.start __midterm_mock_Start
+.start __test_Start
 .depend "_SystemEnumStrict" "20211222160339"
 .depend "_SystemStrictLists" "20211222160339"
 .depend "StdStrictLists" "20211222160339"
@@ -22,7 +22,7 @@
 .depend "StdOverloaded" "20211222160339"
 .depend "StdBool" "20211222160339"
 .depend "StdEnv" "20211222160339"
-.module m_midterm_mock "midterm_mock" "20231109104635"
+.module m_test "test" "20231109094913"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -60,127 +60,83 @@
 .implab n_S.6 ea_S.6
 .implab _driver
 .impmod _SystemEnum
-.impdesc e__SystemEnum_d_from_to;6
-.implab e__SystemEnum_n_from_to;6 e__SystemEnum_ea_from_to;6
-.impmod StdOrdList
-.implab e_StdOrdList_smaxList;15
+.implab e__SystemEnum_s_from_to;6
 .impmod StdList
-.implab e_StdList_slength;47
 .implab e_StdList_ssum;72
 .impmod StdInt
-.implab e_StdInt_s-;7
-.implab e_StdInt_s/;10
-.implab e_StdInt_sabs;13
-.implab e_StdInt_s<;17
-.impmod StdBool
-.implab e_StdBool_snot
-.export __midterm_mock_Start
+.impdesc e_StdInt_d*;9
+.implab e_StdInt_n*;9
+.export __test_Start
 .o 0 0
-__midterm_mock_Start
+__test_Start
 	build _ 0 n2
 .d 1 0
 	jmp _driver
-.n 0 _ ea2
+.n 0 _
 .o 1 0
 n2
 	push_node _cycle_in_spine 0
-.o 1 0
+.d 0 0
+	jsr ea2
+.o 0 1 i
+	fillI_b 0 0
+	pop_b 1
+.d 1 0
+	rtn
+.o 0 0
 ea2
-.o 1 0
+.o 0 0
 s2
-	buildh _Nil 0
-	buildI 100
-	buildI 1
-	build e__SystemEnum_d_from_to;6 2 e__SystemEnum_n_from_to;6
-	buildh _Cons 2
-	buildI 30
-	buildI 20
-	build e__SystemEnum_d_from_to;6 2 e__SystemEnum_n_from_to;6
-	buildh _Cons 2
-	buildI 10
-	buildI 1
-	build e__SystemEnum_d_from_to;6 2 e__SystemEnum_n_from_to;6
-	buildh _Cons 2
-	buildI 10
+	create
+	pushI 10
+	pushI 1
+.d 1 2 ii
+	jsr e__SystemEnum_s_from_to;6
+.o 1 0
+.d 1 0
+	jmp s1
+.o 1 0
+s1
+	create
 	push_a 1
 	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 3 0
-	jmp s1
-.o 3 0
-s1
-	push_a 0
-	push_a 2
-	update_a 1 3
-	updatepop_a 0 2
-.d 3 0
-	jmp s3
-.n 2 _ ea3
+	updatepop_a 0 1
+.d 2 0
+	jsr s3
+.o 1 0
+.d 1 0
+	jmp e_StdList_ssum;72
+.n 1 _ ea3
 .o 1 0
 n3
-	push_node _cycle_in_spine 2
-.o 3 0
+	push_node _cycle_in_spine 1
+.o 2 0
 ea3
-	jsr_eval 1
-.o 3 0
+	jsr_eval 0
+.o 2 0
 s3
 	push_a 0
-	push_a 2
-	update_a 1 3
-	updatepop_a 0 2
-.d 3 0
+	updatepop_a 0 1
+.d 2 0
 	jmp s4
-.o 3 0
+.o 2 0
 s4
 	eq_desc _Cons 2 0
 	jmp_true case.1
 	jmp case.2
 case.1
 	repl_args 2 2
+	push_a 1
+	build _ 1 n3
+	buildI 2
 	push_a 2
-	jsr_eval 0
-	pushI_a 3
-	pop_a 1
-	push_a 0
-	jsr_eval 0
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	push_a 0
-.d 1 0
-	jsr e_StdList_ssum;72
-.o 0 1 i
-	divI
-	push_a 0
-.d 1 0
-	jsr e_StdOrdList_smaxList;15
-.o 0 1 i
-	subI
-.d 0 1 i
-	jsr e_StdInt_sabs;13
-.o 0 1 i
-	ltI
-	notB
-	jmp_false else.3
-	push_a 1
-	push_a 3
-	build _ 2 n3
-	push_a 1
-	fillh _Cons 2 5
-	pop_a 3
+	build _ 2 e_StdInt_n*;9
+	fillh _Cons 2 4
+	pop_a 2
 .d 1 0
 	rtn
-else.3
-	push_a 1
-	jsr_eval 0
-	push_a 3
-	update_a 1 4
-	updatepop_a 0 3
-.d 3 0
-	jmp s3
 case.2
-	fillh _Nil 0 2
-	pop_a 2
+	fillh _Nil 0 1
+	pop_a 1
 .d 1 0
 	rtn

@@ -50,8 +50,8 @@ truckParker num list = (length[n \\ n<-[1..num]& y<-list, x<-list | abs(x - y) =
  * and then use the operator to find the value of the tuple
 */
 
-//  tripCalc :: [(String, (Int Int -> Int), String)] -> [Int]
-// tripCalc list = [  (snd3 ls) (toInt(fst3 ls)) (toInt(thd3 ls))\\ls<-list]
+tripCalc :: [(String, (Int Int -> Int), String)] -> [Int]
+tripCalc list = [  (snd3 ls) (toInt(fst3 ls)) (toInt(thd3 ls))\\ls<-list]
 
 // Start = tripCalc [("100", +, "45"),("153", *, "445") ] // [145,68085]
 //Start = tripCalc [("100", -, "45"),("153", /, "445") ] //  [55,0]
@@ -88,11 +88,11 @@ digRemover (a, tuple) = toElement [x\\x <- (toDigit a) & y <- tuple | x<>y]
  * [(5,2),(3,4)] -> [1] 
 */
 
-// Props :: [[(Int,Int)]] -> [Int]
-
-//Start = Props [[(1,2), (2,2), (3,2)], [], [(5,2), (3,4)]] // [2,0,1]
-//Start = Props [[(5,3), (2,1122), (3123,21)], [(1,-123), (0,0)], [(5,2), (3222,4)], [(5,2), (3,4)]] // [2,2,2,1]
-//Start = Props [[(1,2), (2,2), (1,2)], [(2,2), (3,4)]] // [1,1]
+Props :: [[(Int,Int)]] -> [Int]
+Props listOfLists = [ length[tuple\\tuple<-list| fst tuple >= snd tuple] \\list <- listOfLists]
+// Start = Props [[(1,2), (2,2), (3,2)], [], [(5,2), (3,4)]] // [2,0,1]
+// Start = Props [[(5,3), (2,1122), (3123,21)], [(1,-123), (0,0)], [(5,2), (3222,4)], [(5,2), (3,4)]] // [2,2,2,1]
+// Start = Props [[(1,2), (2,2), (1,2)], [(2,2), (3,4)]] // [1,1]
 
 
 
@@ -135,12 +135,13 @@ digRemover (a, tuple) = toElement [x\\x <- (toDigit a) & y <- tuple | x<>y]
  * Note: if there is no even sums, return -1
 */
 
-// evenConds:: [[Int]] -> Int
-
-//Start = evenConds [[3,3,3],[],[10,5,1],[15,2]] //16
-//Start = evenConds [[1,1], [9,9], [100,1]] //18
-//Start = evenConds [[90,3,6],[71,52,12,1],[53,25]] //136
-//Start = evenConds [] //0
+evenConds:: [[Int]] -> Int
+evenConds [] = 0
+evenConds listOfLists = maxList[sum list \\list<-listOfLists]
+// Start = evenConds [[3,3,3],[],[10,5,1],[15,2]] //17
+// Start = evenConds [[1,1], [9,9], [100,1]] //18
+// Start = evenConds [[90,3,6],[71,52,12,1],[53,25]] //136
+// Start = evenConds [] //0
 
 
 
@@ -154,11 +155,11 @@ digRemover (a, tuple) = toElement [x\\x <- (toDigit a) & y <- tuple | x<>y]
  * Note: If there are no palindroms, return 1
 */
 
-// prodPali :: [[a]] -> a | * a & one a & Eq a
-
-//Start = prodPali [[1,2,1], [4,5], [1,2,3,2,1]] //24
-//Start = prodPali [[1.0,11.0,2.0], [], [10.1,10.1]] // 102.01
-//Start = prodPali [[1,3]] // 1
+prodPali :: [[a]] -> a | * a & one a & Eq a
+prodPali listOfLists = prod [prod list\\list<- listOfLists| list == reverse list]
+// Start = prodPali [[1,2,1], [4,5], [1,2,3,2,1]] //24
+// Start = prodPali [[1.0,11.0,2.0], [], [10.1,10.1]] // 102.01
+// Start = prodPali [[1,3]] // 1
 
 
 /* Bigger than average 
@@ -170,10 +171,8 @@ digRemover (a, tuple) = toElement [x\\x <- (toDigit a) & y <- tuple | x<>y]
  * number.
 */
 
-
-
-// BTavg :: [[Int]] Int -> [[Int]]
-
-//Start = BTavg [[1,2,4], [1,2]] 2 // [[1,2,4]]
-//Start = BTavg [[1]] 1 // []
-//Start = BTavg [[1..10], [20..30], [1..100]] 10 // [[1..100]]
+BTavg :: [[Int]] Int -> [[Int]]
+BTavg listOfLists num = [list\\list<-listOfLists| (abs((maxList list) - ((sum list)/(length list)))) >= num ]
+// Start = BTavg [[1,2,4], [1,2]] 2 // [[1,2,4]]
+// Start = BTavg [[1]] 1 // []
+// Start = BTavg [[1..10], [20..30], [1..100]] 10 // [[1..100]]

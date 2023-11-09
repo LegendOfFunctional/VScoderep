@@ -22,6 +22,10 @@ import StdEnv
     Input: n = 1111
     Output: 0 (There is no unique digit in n.)
 */
+x =3
+(filter ((==) x) [1,2,3,4,3,5,6]) // [3,3]
+
+filter ((=))
 
 toDigit :: Int -> [Int]
 toDigit x 
